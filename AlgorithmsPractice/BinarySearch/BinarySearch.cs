@@ -354,4 +354,46 @@ public class BinarySearch
         return value.ToString();
     }
     #endregion
+
+
+    #region RangeSumBST
+    // Given the root node of a binary search tree and two integers low and high, return the sum of values of all nodes with a value in the inclusive range [low, high].
+    //
+    // Example 1:
+    //
+    // Input: root = [10,5,15,3,7,null,18], low = 7, high = 15
+    // Output: 32
+    // Explanation: Nodes 7, 10, and 15 are in the range [7, 15]. 7 + 10 + 15 = 32.
+    public int RangeSumBST(Tree root, int low, int high) {
+        if(root == null) return 0;
+        Queue<Tree> queueNodes = new Queue<Tree>();
+        queueNodes.Enqueue(root);
+        int sum = 0;
+
+        while(queueNodes.Count > 0){
+            var currentValue = queueNodes.Dequeue();
+            var currentValueInt = Convert.ToInt32(queueNodes.Dequeue().Value.ToString());
+            if(high >= currentValueInt && currentValueInt >= low){
+                var isHigh = low >= currentValueInt;
+                var isLow = low >= currentValueInt;
+                Console.WriteLine("high >= currentValueInt.val is " + isHigh);
+                Console.WriteLine("low >= currentValueInt.val is " + isLow);
+                Console.WriteLine("Current value is " + currentValueInt);
+                sum += currentValueInt;
+            }
+
+            if(currentValue.Left != null)
+            {
+                queueNodes.Enqueue(currentValue.Left);
+            }
+            if(currentValue.Right != null)
+            {
+                queueNodes.Enqueue(currentValue.Right);
+            }
+        }   
+
+        return sum;
+    
+    }
+    #endregion
 }
